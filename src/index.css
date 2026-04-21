@@ -1,0 +1,311 @@
+@import "tailwindcss";
+
+/* ============================================================
+   FlowCraft — Design System
+   A dark-first design system inspired by modern automation UIs
+   ============================================================ */
+
+/* ---------- Custom Theme ---------- */
+@theme {
+  /* Colors — Primary */
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+
+  /* Colors — Surface (Mapped to Dynamic Theme) */
+  --color-surface-50: var(--surface-50);
+  --color-surface-100: var(--surface-100);
+  --color-surface-200: var(--surface-200);
+  --color-surface-300: var(--surface-300);
+  --color-surface-400: var(--surface-400);
+  --color-surface-500: var(--surface-500);
+  --color-surface-600: var(--surface-600);
+  --color-surface-700: var(--surface-700);
+  --color-surface-800: var(--surface-800);
+  --color-surface-900: var(--surface-900);
+
+  /* Colors — Accent */
+  --color-accent-emerald: #10b981;
+  --color-accent-amber: #f59e0b;
+  --color-accent-rose: #f43f5e;
+  --color-accent-cyan: #06b6d4;
+  --color-accent-violet: #8b5cf6;
+
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --spacing-sidebar: 260px;
+  --spacing-panel: 320px;
+}
+
+/* ---------- Base Styles ---------- */
+@layer base {
+  :root {
+    /* LIGHT MODE PALETTE (Vercel/Apple Core) */
+    --surface-500: #fafafa; /* Canvas Background */
+    --surface-400: #ffffff; /* Panel/Card Background */
+    --surface-300: #f4f4f5; /* Soft Hover BG */
+    --surface-200: #e5e5e5; /* Borders */
+    --surface-100: #71717a; /* Muted Text/Icon */
+    --surface-50: #09090b;  /* Core Text */
+    
+    /* Reduced glassmorphism variables */
+    --bg-glass: rgba(255, 255, 255, 0.95);
+    --border-glass: rgba(0, 0, 0, 0.06);
+    --shadow-glass: 0 4px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .dark {
+    /* ORIGINAL DARK MODE PALETTE */
+    --surface-50: #f8fafc;
+    --surface-100: #1e293b;
+    --surface-200: #1a2236;
+    --surface-300: #151c2c;
+    --surface-400: #0d1117; /* Slate-black dark mode base */
+    --surface-500: #020617; /* Deep space canvas */
+    --surface-600: #0a0f1a;
+    --surface-700: #070b14;
+    --surface-800: #050810;
+    --surface-900: #03050a;
+    
+    --bg-glass: rgba(13, 17, 23, 0.85);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --shadow-glass: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-surface-500);
+    color: var(--color-surface-50);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  #root {
+    height: 100%;
+    width: 100%;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
+  }
+}
+
+/* ---------- Utility Classes ---------- */
+@layer utilities {
+  .glass {
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+  }
+
+  .glass-strong {
+    background: var(--bg-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-glass);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.15),
+                0 0 40px rgba(99, 102, 241, 0.05);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+  }
+
+  .glow-rose {
+    box-shadow: 0 0 12px rgba(244, 63, 94, 0.3);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-primary-400), var(--color-accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes shine {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+  .animate-shine {
+    animation: shine linear infinite;
+  }
+
+  .animate-slide-right {
+    animation: slideRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 2s ease-in-out infinite;
+  }
+}
+
+/* ---------- Keyframe Animations ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ---------- Form Field Styles (Uiverse / Minimalist) ---------- */
+.field-input, .field-select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  color: var(--surface-50);
+  background: var(--surface-400);
+  border: 1px solid var(--surface-200);
+  border-radius: 8px; /* Slightly sharper Apple-style rounded rect */
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.field-input::placeholder {
+  color: var(--surface-100);
+}
+
+.field-input:hover, .field-select:hover {
+  border-color: var(--surface-100);
+  background: var(--surface-300);
+}
+
+.field-input:focus, .field-select:focus {
+  border-color: var(--color-primary-400);
+  background: var(--surface-400);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), inset 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.field-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+/* ---------- React Flow Overrides ---------- */
+.react-flow__background {
+  background-color: var(--surface-500) !important;
+}
+
+.react-flow__minimap {
+  background-color: var(--surface-400) !important;
+  border-radius: 12px;
+  border: 1px solid var(--surface-200) !important;
+  overflow: hidden;
+}
+
+.react-flow__controls {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--surface-200) !important;
+  box-shadow: var(--shadow-glass) !important;
+}
+
+.react-flow__controls-button {
+  background: var(--surface-400) !important;
+  border-bottom: 1px solid var(--surface-200) !important;
+  fill: var(--surface-50) !important;
+  color: var(--surface-50) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--surface-300) !important;
+}
+
+.react-flow__edge-path {
+  stroke: rgba(99, 102, 241, 0.4) !important;
+  stroke-width: 2 !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--color-primary-400) !important;
+  stroke-width: 3 !important;
+}
+
+.react-flow__handle {
+  width: 10px !important;
+  height: 10px !important;
+  background: var(--color-primary-500) !important;
+  border: 2px solid var(--color-surface-400) !important;
+  transition: all 0.2s ease;
+}
+
+.react-flow__handle:hover {
+  background: var(--color-primary-400) !important;
+  transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+}
+
+.react-flow__connection-line {
+  stroke: var(--color-primary-400) !important;
+  stroke-width: 2 !important;
+  stroke-dasharray: 5 !important;
+}
